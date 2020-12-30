@@ -1,3 +1,3 @@
 # PythonCourse
 
-From A to Z.
+From A to Z. For fun.
