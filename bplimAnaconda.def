@@ -1,0 +1,21 @@
+Bootstrap: docker
+From: ubuntu:18.04
+  
+%runscript
+    exec echo "Anaconda Singularity Image"
+  
+%environment
+    # add anaconda path
+    PATH="/opt/anaconda/bin:$PATH"
+  
+%labels
+    AUTHOR DSITI/ESA
+
+%post
+      apt-get update && apt-get -y install wget xkb-data x11-apps bzip2 qt5-default mesa-utils libgl1-mesa-dev libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6 iproute2
+      mkdir /data
+      apt install https://github.com/tagplus5/vscode-ppa/blob/master/ubuntu/code_1.50.1-1602600906_amd64.deb -y
+      bash https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh -b -p /opt/anaconda
+      /opt/anaconda/bin/pip install PySimpleGUI clipboard pyperclip
+      /opt/anaconda/bin/conda update --prefix /opt/anaconda --all
+  	/opt/anaconda/bin/conda update conda
