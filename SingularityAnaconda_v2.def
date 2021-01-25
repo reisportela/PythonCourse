@@ -13,7 +13,11 @@ libglib2.0-0 \
 libxext6 \
 libsm6 \
 libxrender1 \
-git
+git \
+ffmpeg \
+libsm6 \
+libxext6
+
 rm -rf /var/lib/apt/lists/*
 apt-get clean
 #Installing Anaconda 3 
