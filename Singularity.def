@@ -9,3 +9,9 @@ From: ubuntu:18.04
 
 %post
     apt-get update && apt-get -y install xkb-data x11-apps bzip2 qt5-default mesa-utils libgl1-mesa-dev libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6 iproute2 libgtk2.0-0 evince
+
+  # Install R, Python, misc. utilities
+  apt-get install -y libopenblas-dev r-base-core libcurl4-openssl-dev libopenmpi-dev openmpi-bin openmpi-common openmpi-doc openssh-client openssh-server libssh-dev wget vim git nano git cmake  gfortran g++ curl wget python autoconf bzip2 libtool libtool-bin python-pip python-dev
+  apt-get clean
+  locale-gen en_US.UTF-8
+  
