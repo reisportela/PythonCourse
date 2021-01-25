@@ -12,10 +12,12 @@ From: ubuntu:18.04
     AUTHOR DSITI/ESA
 
 %post
-      apt-get update && apt-get -y install wget xkb-data x11-apps bzip2 qt5-default mesa-utils libgl1-mesa-dev libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6 iproute2
+      apt-get update && apt-get -y install wget xkb-data x11-apps bzip2 qt5-default mesa-utils libgl1-mesa-dev libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6 iproute2 snapd
       mkdir /data
-      apt install https://github.com/tagplus5/vscode-ppa/blob/master/ubuntu/code_1.50.1-1602600906_amd64.deb -y
-      bash https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh -b -p /opt/anaconda
+      wget http://packages.microsoft.com/repos/vscode/pool/main/c/code/code_1.52.1-1608136922_amd64.deb
+      apt install ./code_1.52.1-1608136922_amd64.deb -y
+      wget https://repo.anaconda.com/archive/Anaconda3-2020.07-Linux-x86_64.sh
+      bash ./Anaconda3-2020.07-Linux-x86_64.sh -b -p /opt/anaconda
       /opt/anaconda/bin/pip install PySimpleGUI clipboard pyperclip
       /opt/anaconda/bin/conda update --prefix /opt/anaconda --all
   	/opt/anaconda/bin/conda update conda
