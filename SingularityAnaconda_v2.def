@@ -1,12 +1,27 @@
 Bootstrap: docker
-
-From: continuumio/miniconda3
-
-%files
-    environment.yml
+From: ubuntu:18.04
 
 %post
-    /opt/conda/bin/conda env create -f environment.yml
 
-%runscript
-    exec /opt/conda/envs/$(head -n 1 environment.yml | cut -f 2 -d ' ')/bin/"$@"
+apt-get update && apt-get -y upgrade
+apt-get -y install \
+build-essential \
+wget \
+bzip2 \
+ca-certificates \
+libglib2.0-0 \
+libxext6 \
+libsm6 \
+libxrender1 \
+git
+rm -rf /var/lib/apt/lists/*
+apt-get clean
+#Installing Anaconda 3 
+wget -c https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh
+/bin/bash Anaconda3-2020.02-Linux-x86_64.sh -bfp /usr/local
+#Conda configuration of channels from .condarc file
+conda config --file /.condarc --add channels defaults
+conda config --file /.condarc --add channels conda-forge
+conda update conda
+#List installed environments
+conda list
