@@ -19,8 +19,4 @@ From: ubuntu:20.10
       wget http://packages.microsoft.com/repos/vscode/pool/main/c/code/code_1.52.1-1608136922_amd64.deb
       apt install ./code_1.52.1-1608136922_amd64.deb -y
       apt install julia
-      wget https://repo.anaconda.com/archive/Anaconda3-2020.07-Linux-x86_64.sh
-      bash ./Anaconda3-2020.07-Linux-x86_64.sh -b -p /opt/anaconda
-      /opt/anaconda/bin/pip install PySimpleGUI clipboard pyperclip
-      /opt/anaconda/bin/conda update --prefix /opt/anaconda --all
-  	  /opt/anaconda/bin/conda update conda
+
