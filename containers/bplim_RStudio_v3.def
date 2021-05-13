@@ -1,0 +1,14 @@
+Bootstrap: docker
+From: ubuntu:20.10
+
+%post
+
+apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends wget r-base-core tzdata
+
+  # Install required R packages
+  R --slave -e 'install.packages("devtools", repos="https://cloud.r-project.org/",dependencies = T)'
+  R --slave -e 'install.packages("packrat",dependencies = T)'
+  R --slave -e 'install.packages("blmrep",dependencies = T)'
+
+  wget https://download1.rstudio.org/desktop/bionic/amd64/rstudio-1.3.1093-amd64.deb
+  apt install -y ./rstudio-1.3.1093-amd64.deb

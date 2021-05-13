@@ -1,0 +1,38 @@
+Bootstrap: docker
+From: ubuntu:20.04
+  
+%runscript
+    exec echo "Anaconda Singularity Image"
+  
+%environment
+    # add anaconda path
+    PATH="/opt/anaconda/bin:$PATH"
+  
+%labels
+    AUTHOR DSITI/ESA
+
+%post
+      apt update && DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends
+      apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends
+      apt-get clean && \
+      rm -rf /var/lib/apt
+      apt-get update && apt-get -y install wget xkb-data x11-apps bzip2 qt5-default mesa-utils libgl1-mesa-dev libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6 iproute2 snapd
+      mkdir /data
+      apt-get install apt-transport-https software-properties-common -y
+      apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+      apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+      add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran40/'
+      apt-get update -y
+      echo "tzdata tzdata/Areas select Europe" > /tmp/preseed.txt; \
+	  echo "tzdata tzdata/Zones/Europe select Lisbon" >> /tmp/preseed.txt; \
+	  debconf-set-selections /tmp/preseed.txt && \
+	  apt-get update && \
+	  apt-get install -y -q tzdata r-base && \
+	  R --vanilla -e 'install.packages("ggplot2", repos="http://cran.wu.ac.at/")'
+      wget http://packages.microsoft.com/repos/vscode/pool/main/c/code/code_1.52.1-1608136922_amd64.deb
+      apt install ./code_1.52.1-1608136922_amd64.deb -y
+      wget https://repo.anaconda.com/archive/Anaconda3-2020.07-Linux-x86_64.sh
+      bash ./Anaconda3-2020.07-Linux-x86_64.sh -b -p /opt/anaconda
+      /opt/anaconda/bin/pip install PySimpleGUI clipboard pyperclip
+      /opt/anaconda/bin/conda update --prefix /opt/anaconda --all
+  	  /opt/anaconda/bin/conda update conda
