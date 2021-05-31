@@ -10,3 +10,4 @@ seaborn
 hunter
 beautifulsoup4
 mechanicalsoup
+markdown
